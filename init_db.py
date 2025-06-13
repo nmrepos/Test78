@@ -9,7 +9,7 @@ def init_db():
         port=int(os.getenv('MYSQL_PORT', '3307')),
         user=os.getenv('MYSQL_USER', 'root'),
         password=os.getenv('MYSQL_PASSWORD', ''),
-        unix_socket=os.getenv('MYSQL_SOCKET', '/workspace/mysqldata/mysql.sock'),
+        unix_socket=os.getenv('MYSQL_SOCKET', '/var/run/mysqld/mysqld.sock'),
     )
     database = os.getenv('MYSQL_DATABASE', 'testapp')
     cursor = conn.cursor()

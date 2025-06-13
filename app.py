@@ -7,12 +7,12 @@ app = Flask(__name__)
 def get_db_connection():
     """Create a MySQL connection using environment variables if provided."""
     return mysql.connector.connect(
-        host=os.getenv('MYSQL_HOST', 'localhost'),
-        port=int(os.getenv('MYSQL_PORT', '3307')),
-        user=os.getenv('MYSQL_USER', 'root'),
-        password=os.getenv('MYSQL_PASSWORD', ''),
+        host=os.getenv('MYSQL_HOST', '127.0.0.1'),        
+        port=int(os.getenv('MYSQL_PORT', '3306')),        
+        user=os.getenv('MYSQL_USER', 'appuser'),
+        password=os.getenv('MYSQL_PASSWORD', 'secretpass'),
         database=os.getenv('MYSQL_DATABASE', 'testapp'),
-        unix_socket=os.getenv('MYSQL_SOCKET', '/workspace/mysqldata/mysql.sock'),
+
     )
 
 HTML_FORM = '''
@@ -45,4 +45,7 @@ def success():
     return 'Login successful!'
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5000)
+    import os
+    port = int(os.environ.get('PORT', 5000))  # <-- Use PORT env variable!
+    app.run(debug=True, port=port)
+
