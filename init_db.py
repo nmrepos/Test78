@@ -5,11 +5,10 @@ import mysql.connector
 def init_db():
     """Create the database and users table using env vars if available."""
     conn = mysql.connector.connect(
-        host=os.getenv('MYSQL_HOST', 'localhost'),
-        port=int(os.getenv('MYSQL_PORT', '3307')),
+        host=os.getenv('MYSQL_HOST', '127.0.0.1'),        
+        port=int(os.getenv('MYSQL_PORT', '3306')),        
         user=os.getenv('MYSQL_USER', 'root'),
-        password=os.getenv('MYSQL_PASSWORD', ''),
-        unix_socket=os.getenv('MYSQL_SOCKET', '/var/run/mysqld/mysqld.sock'),
+        password=os.getenv('MYSQL_PASSWORD', 'root')
     )
     database = os.getenv('MYSQL_DATABASE', 'testapp')
     cursor = conn.cursor()

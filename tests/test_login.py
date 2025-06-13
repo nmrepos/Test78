@@ -15,8 +15,8 @@ def find_free_port():
 def test_login():
     DB_HOST = os.getenv('MYSQL_HOST', '127.0.0.1')
     DB_PORT = int(os.getenv('MYSQL_PORT', '3306'))
-    DB_USER = os.getenv('MYSQL_USER', 'appuser')
-    DB_PASS = os.getenv('MYSQL_PASSWORD', 'secretpass')
+    DB_USER = os.getenv('MYSQL_USER', 'root')
+    DB_PASS = os.getenv('MYSQL_PASSWORD', 'root')
     DB_NAME = os.getenv('MYSQL_DATABASE', 'testapp')
 
     PORT = find_free_port()
@@ -48,11 +48,11 @@ def test_login():
         database=DB_NAME
     )
     cur = conn.cursor()
-    cur.execute('SELECT username, password FROM users WHERE username=%s', ('testuser',))
+    cur.execute('SELECT username, password FROM users WHERE username=%s', ('nidhun',))
     result = cur.fetchone()
     cur.close()
     conn.close()
-    assert result == ('testuser', 'secret'), f"Expected ('testuser', 'secret'), got {result}"
+    assert result == ('nidhun', 'nidhun'), f"Expected ('nidhun', 'nidhun'), got {result}"
 
 if __name__ == '__main__':
     test_login()
