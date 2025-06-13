@@ -1,16 +1,18 @@
 from flask import Flask, request, render_template_string, redirect
+import os
 import mysql.connector
 
 app = Flask(__name__)
 
 def get_db_connection():
+    """Create a MySQL connection using environment variables if provided."""
     return mysql.connector.connect(
-        host='localhost',
-        port=3307,
-        user='root',
-        password='',
-        database='testapp',
-        unix_socket='/workspace/mysqldata/mysql.sock'
+        host=os.getenv('MYSQL_HOST', 'localhost'),
+        port=int(os.getenv('MYSQL_PORT', '3307')),
+        user=os.getenv('MYSQL_USER', 'root'),
+        password=os.getenv('MYSQL_PASSWORD', ''),
+        database=os.getenv('MYSQL_DATABASE', 'testapp'),
+        unix_socket=os.getenv('MYSQL_SOCKET', '/workspace/mysqldata/mysql.sock'),
     )
 
 HTML_FORM = '''
